@@ -39,11 +39,6 @@ public class Main {
     private boolean mJustClasses = false;
 
     /**
-     * Whether to include "cyanogenmod" namespace classes in the dump.
-     */
-    private boolean mIncludeCMClasses = false;
-
-    /**
      * Entry point.
      */
     public static void main(String[] args) {
@@ -62,7 +57,7 @@ public class Main {
             for (String fileName : mInputFileNames) {
                 RandomAccessFile raf = openInputFile(fileName);
                 DexData dexData = new DexData(raf);
-                dexData.load(mIncludeCMClasses);
+                dexData.load();
 
                 if (first) {
                     first = false;
@@ -205,8 +200,6 @@ public class Main {
                 //System.out.println("+++ using format " + mOutputFormat);
             } else if (arg.equals("--just-classes")) {
                 mJustClasses = true;
-            } else if (arg.equals("--include-cm-classes")) {
-                mIncludeCMClasses = true;
             } else {
                 System.err.println("Unknown option '" + arg + "'");
                 throw new UsageException();
